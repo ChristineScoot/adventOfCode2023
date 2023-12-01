@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 public class Day1 {
     public static void part1() throws FileNotFoundException {
+        System.out.println("~~~~~~~~~~~~Day 1: Part 1~~~~~~~~~~~~");
         File myObj = new File("src/main/resources/input1_1.txt");
 //        File myObj = new File("src/main/resources/input1_1eg.txt");
         Scanner myReader = new Scanner(myObj);
@@ -55,6 +56,7 @@ public class Day1 {
     }
 
     public static void part2() throws FileNotFoundException {
+        System.out.println("~~~~~~~~~~~~Day 1: Part 2~~~~~~~~~~~~");
         File myObj = new File("src/main/resources/input1_1.txt");
 //        File myObj = new File("src/main/resources/input1_1eg1.txt");
         Scanner myReader = new Scanner(myObj);
@@ -110,7 +112,6 @@ public class Day1 {
             int secondDigit = calculateSecondDigit(instructions);
             sum += (firstDigit * 10 + secondDigit);
         }
-        System.out.println("");
         System.out.println(sum);
     }
 }
