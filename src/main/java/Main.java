@@ -17,5 +17,7 @@ public class Main {
         System.out.println(Day5.part1(new File("src/main/resources/input5_1.txt")));
         //Part 2 is a brute force, takes almost 2h for the input provided
 //        System.out.println(Day5.part2(new File("src/main/resources/input5_1.txt")));
+        System.out.println(Day6.part1(new File("src/main/resources/input6_1.txt")));
+        System.out.println(Day6.part2(new File("src/main/resources/input6_1.txt")));
     }
 }
