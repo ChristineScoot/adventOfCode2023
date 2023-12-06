@@ -155,7 +155,7 @@ public class Day5 {
     }
 
     public static BigInteger part2(File myObj) throws FileNotFoundException {
-        System.out.println("~~~~~~~~~~~~Day 5: Part 1~~~~~~~~~~~~");
+        System.out.println("~~~~~~~~~~~~Day 5: Part 2~~~~~~~~~~~~");
         Scanner scanner = new Scanner(myObj);
         BigInteger location;
         BigInteger minLocation = new BigInteger("9937863290");
