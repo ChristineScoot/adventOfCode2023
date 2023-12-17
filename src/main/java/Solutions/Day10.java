@@ -89,15 +89,6 @@ public class Day10 {
         return ++sum / 2;
     }
 
-    public static void printArray(char[][] arr) {
-        for (char[] chars : arr) {
-            for (char aChar : chars) {
-                System.out.print(aChar);
-            }
-            System.out.println();
-        }
-    }
-
     public static long part2(String filePath) throws IOException {
         System.out.println("~~~~~~~~~~~~Day 10: Part 2~~~~~~~~~~~~");
         initialise();
@@ -180,7 +171,7 @@ public class Day10 {
         queue.add(new Coord(0, 0));
         while (!queue.isEmpty())
             fillOuter1(newnewGrid);
-//        printArray(newnewGrid);
+//        HelperFunction.printArray(newnewGrid);
         for (char[] chars : newnewGrid) {
             for (char aChar : chars) {
                 if (aChar == 'Q')
