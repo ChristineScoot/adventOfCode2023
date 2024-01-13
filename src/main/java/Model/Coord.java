@@ -1,6 +1,8 @@
 package Model;
 
-public class Coord {
+import java.util.Objects;
+
+public class Coord implements Comparable<Coord> {
     int x;
     int y;
     public String name;
@@ -8,7 +10,7 @@ public class Coord {
     public Coord(int x, int y) {
         this.x = x;
         this.y = y;
-        name = "(" + x +", "+ y+")";
+        name = "(" + x + ", " + y + ")";
     }
 
     public int getX() {
@@ -35,7 +37,24 @@ public class Coord {
 
     @Override
     public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
         Coord newCoord = (Coord) obj;
-        return this.x==newCoord.getX() && this.y == newCoord.getY();
+        return x == newCoord.getX() && y == newCoord.getY();
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
+
+    public boolean outOfBounds(int width, int height) {
+        return !(x < height && x >= 0 && y < width && y >= 0);
+    }
+
+    @Override
+    public int compareTo(Coord newCoord) {
+        if (newCoord.getX() == x && newCoord.getY() == y)
+            return 0;
+        return -1;    }
 }
