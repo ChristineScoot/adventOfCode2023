@@ -18,6 +18,6 @@ public class TestDay15 {
 
     @Test
     public void part2() throws IOException {
-        Assert.assertEquals("The sum should be 145", 145, Day15.part2("src/main/resources/input15_1eg.txt"));
+        Assert.assertEquals("The sum should be 145", 145, Day15.part2("src/main/resources/input15_1eg2.txt"));
     }
 }
