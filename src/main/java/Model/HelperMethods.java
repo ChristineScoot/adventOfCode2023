@@ -9,4 +9,13 @@ public class HelperMethods {
             System.out.println();
         }
     }
+
+    public static void printArray(int[][] arr) {
+        for (int[] chars : arr) {
+            for (int aChar : chars) {
+                System.out.print(aChar);
+            }
+            System.out.println();
+        }
+    }
 }
