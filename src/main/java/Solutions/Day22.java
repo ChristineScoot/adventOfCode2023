@@ -19,22 +19,21 @@ public class Day22 {
         String[] fileContentString = fileContent.split("\\r?\\n");
         List<Brick> bricks = getSnapshotBricks(fileContentString);
         for (int currentBrickId = 0; currentBrickId < bricks.size(); currentBrickId++) {
-            Brick currentBrick=bricks.get(currentBrickId);
-            int currentMinZ= 1;
-            for (int brickToCheckId = 0; brickToCheckId < currentBrickId; brickToCheckId++) { //can this be reversed and break; in intersects?
-                Brick brickToCheck=bricks.get(brickToCheckId);
-                if(brickToCheck.intersects(currentBrick))
-                    currentMinZ=Math.max(currentMinZ, brickToCheck.getMaxZ()+1);
+            Brick currentBrick = bricks.get(currentBrickId);
+            int currentMinZ = 1;
+            for (int brickToCheckId = 0; brickToCheckId < currentBrickId; brickToCheckId++) {
+                Brick brickToCheck = bricks.get(brickToCheckId);
+                if (brickToCheck.intersects(currentBrick))
+                    currentMinZ = Math.max(currentMinZ, brickToCheck.getMaxZ() + 1);
             }
-            int deltaZ=currentMinZ - currentBrick.getMinZ();
+            int deltaZ = currentMinZ - currentBrick.getMinZ();
             currentBrick.setZ(deltaZ);
-
         }
 
         bricks.sort(Brick::compareMinZ);
         countSupportedBricks(bricks);
 
-        long count=0;
+        long count = 0;
         for (Brick currentBrick : bricks) {
             boolean isSafe = true;
             for (Brick supportedBrick : supports.get(currentBrick)) {
@@ -49,20 +48,20 @@ public class Day22 {
     }
 
     private static void countSupportedBricks(List<Brick> bricks) {
-        for (Brick brick:bricks) {
+        for (Brick brick : bricks) {
             supportedBy.put(brick, new ArrayList<>());
             supports.put(brick, new ArrayList<>());
         }
         for (int currentBrickId = 0; currentBrickId < bricks.size(); currentBrickId++) {
             Brick currentBrick = bricks.get(currentBrickId);
-            for (int brickToCheckId = 0; brickToCheckId < currentBrickId; brickToCheckId++) { //can this be reversed and break; in intersects?
+            for (int brickToCheckId = 0; brickToCheckId < currentBrickId; brickToCheckId++) {
                 Brick brickToCheck = bricks.get(brickToCheckId);
-                if(brickToCheck.intersects(currentBrick) && brickToCheck.getMaxZ()+1==currentBrick.getMinZ()){
-                    List<Brick> temp= supportedBy.remove(currentBrick);
+                if (brickToCheck.intersects(currentBrick) && brickToCheck.getMaxZ() + 1 == currentBrick.getMinZ()) {
+                    List<Brick> temp = supportedBy.remove(currentBrick);
                     temp.add(brickToCheck);
-                    supportedBy.put(currentBrick,temp);
+                    supportedBy.put(currentBrick, temp);
 
-                    temp=supports.remove(brickToCheck);
+                    temp = supports.remove(brickToCheck);
                     temp.add(currentBrick);
                     supports.put(brickToCheck, temp);
                 }
@@ -74,8 +73,8 @@ public class Day22 {
         List<Brick> bricks = new LinkedList<>();
         for (String line : fileContentString) {
             String[] coordinates = line.split("[,~]");
-                bricks.add(new Brick(Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]), Integer.parseInt(coordinates[2]),
-                        Integer.parseInt(coordinates[3]), Integer.parseInt(coordinates[4]), Integer.parseInt(coordinates[5])));
+            bricks.add(new Brick(Integer.parseInt(coordinates[0]), Integer.parseInt(coordinates[1]), Integer.parseInt(coordinates[2]),
+                    Integer.parseInt(coordinates[3]), Integer.parseInt(coordinates[4]), Integer.parseInt(coordinates[5])));
         }
         bricks.sort(Brick::compareMinZ);
         return bricks;
