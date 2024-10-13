@@ -79,4 +79,57 @@ public class Day22 {
         bricks.sort(Brick::compareMinZ);
         return bricks;
     }
+
+    public static long part2(String filePath) throws IOException {
+        supportedBy = new HashMap<>();
+        supports = new HashMap<>();
+        System.out.println("~~~~~~~~~~~~Day 22: Part 2~~~~~~~~~~~~");
+        String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
+        String[] fileContentString = fileContent.split("\\r?\\n");
+        List<Brick> bricks = getSnapshotBricks(fileContentString);
+        for (int currentBrickId = 0; currentBrickId < bricks.size(); currentBrickId++) {
+            Brick currentBrick = bricks.get(currentBrickId);
+            int currentMinZ = 1;
+            for (int brickToCheckId = 0; brickToCheckId < currentBrickId; brickToCheckId++) {
+                Brick brickToCheck = bricks.get(brickToCheckId);
+                if (brickToCheck.intersects(currentBrick))
+                    currentMinZ = Math.max(currentMinZ, brickToCheck.getMaxZ() + 1);
+            }
+            int deltaZ = currentMinZ - currentBrick.getMinZ();
+            currentBrick.setZ(deltaZ);
+        }
+
+        bricks.sort(Brick::compareMinZ);
+        countSupportedBricks(bricks);
+
+        long count = 0;
+        for (Brick currentBrick : bricks) {
+            boolean isSafe = true;
+            for (Brick supportedBrick : supports.get(currentBrick)) {
+                if (supportedBy.get(supportedBrick).size() == 1) {
+                    isSafe = false;
+                }
+            }
+            if (!isSafe) {
+                Set<Brick> wouldFallDown = new HashSet<>();
+                wouldFallDown.add(currentBrick);
+                Queue<Brick> fallQueue = new LinkedList<>(supports.get(currentBrick));
+                while (!fallQueue.isEmpty()) {
+                    Brick brick = fallQueue.remove();
+
+                    if (wouldFallDown.containsAll(supportedBy.get(brick))) {
+                        wouldFallDown.add(brick);
+                    }
+
+                    for (Brick supportedBrick : supports.get(brick)) {
+                        if (!wouldFallDown.contains(supportedBrick)) {
+                            fallQueue.add(supportedBrick);
+                        }
+                    }
+                }
+                count += wouldFallDown.size() - 1;
+            }
+        }
+        return count;
+    }
 }

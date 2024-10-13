@@ -34,4 +34,9 @@ public class TestDay22 {
     public void part1e() throws IOException {
         Assert.assertEquals("1 bricks could be safely disintegrated", 1, Day22.part1("src/main/resources/input22_6eg.txt"));
     }
+
+    @Test
+    public void part2() throws IOException {
+        Assert.assertEquals("7 bricks would fall", 7, Day22.part2("src/main/resources/input22_1eg.txt"));
+    }
 }
