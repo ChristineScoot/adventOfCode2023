@@ -54,4 +54,8 @@ public class Rule {
         else
             return null;
     }
+
+    public boolean isFinalDestination(){
+        return part==null;
+    }
 }
